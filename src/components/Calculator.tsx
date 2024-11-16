@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { Calculator as CalculatorIcon, CreditCard, DollarSign, Percent, Clock, ArrowRightLeft, Gift, MinusCircle, PiggyBank, Globe, ArrowUpDown, TrendingUp, Timer, BookOpen } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import React from 'react';
+import { Calculator as CalculatorIcon, CreditCard, DollarSign, Percent, Clock, ArrowRightLeft, Gift, MinusCircle, PiggyBank, Globe, ArrowUpDown, TrendingUp, Timer } from 'lucide-react';
 import CalculatorCard from './CalculatorCard';
 import CurrencySelector from './CurrencySelector';
 import AdBlock from './AdBlock';
@@ -32,9 +31,8 @@ const calculators = [
 ];
 
 export default function Calculator() {
-  const [activeCalculator, setActiveCalculator] = useState('interest');
+  const [activeCalculator, setActiveCalculator] = React.useState('interest');
   const ActiveComponent = calculators.find(calc => calc.id === activeCalculator)?.component;
-  const location = useLocation();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-indigo-50 to-purple-50">
@@ -42,37 +40,6 @@ export default function Calculator() {
         <AdBlock variant="notification" />
       </div>
       
-      <header className="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-800 shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
-            <div className="flex items-center">
-              <div className="bg-white/20 p-2 rounded-lg backdrop-blur-sm">
-                <CalculatorIcon className="h-8 w-8 text-white" />
-              </div>
-              <h1 className="ml-3 text-2xl font-bold text-white">Credit Card Genius</h1>
-            </div>
-            <div className="flex items-center space-x-6">
-              <nav className="flex space-x-6">
-                <Link 
-                  to="/" 
-                  className={`text-white hover:text-indigo-100 font-medium ${location.pathname === '/' ? 'border-b-2 border-white' : ''}`}
-                >
-                  Calculators
-                </Link>
-                <Link 
-                  to="/blog" 
-                  className={`text-white hover:text-indigo-100 font-medium flex items-center ${location.pathname.startsWith('/blog') ? 'border-b-2 border-white' : ''}`}
-                >
-                  <BookOpen className="h-4 w-4 mr-1" />
-                  Blog
-                </Link>
-              </nav>
-              <CurrencySelector />
-            </div>
-          </div>
-        </div>
-      </header>
-
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mb-8">
           {calculators.map((calc) => (

@@ -10,15 +10,16 @@ interface SettingsContextType {
   currency: Currency;
   setCurrency: (currency: Currency) => void;
   formatAmount: (amount: number | string) => string;
+  currencies: Currency[];
 }
 
-const currencies: Currency[] = [
+export const currencies: Currency[] = [
   { code: 'USD', symbol: '$', name: 'US Dollar' },
   { code: 'EUR', symbol: '€', name: 'Euro' },
   { code: 'GBP', symbol: '£', name: 'British Pound' },
   { code: 'CAD', symbol: 'C$', name: 'Canadian Dollar' },
   { code: 'AUD', symbol: 'A$', name: 'Australian Dollar' },
-  { code: 'JPY', symbol: '¥', name: 'Japanese Yen' },
+  { code: 'JPY', symbol: '¥', name: 'Japanese Yen' }
 ];
 
 const SettingsContext = createContext<SettingsContextType | undefined>(undefined);
@@ -39,7 +40,7 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <SettingsContext.Provider value={{ currency, setCurrency, formatAmount }}>
+    <SettingsContext.Provider value={{ currency, setCurrency, formatAmount, currencies }}>
       {children}
     </SettingsContext.Provider>
   );
@@ -52,5 +53,3 @@ export function useSettings() {
   }
   return context;
 }
-
-export { currencies };
