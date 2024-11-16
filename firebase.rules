@@ -1,0 +1,16 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Blog categories are publicly readable
+    match /blog_categories/{categoryId} {
+      allow read: if true;
+      allow write: if false;
+    }
+    
+    // Blog posts are publicly readable
+    match /blog_posts/{postId} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}
